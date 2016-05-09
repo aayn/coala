@@ -3,7 +3,8 @@ from copy import copy
 from inspect import getfullargspec, ismethod
 
 from coalib.misc.Decorators import enforce_signature
-from coalib.settings.DocumentationComment import DocumentationComment
+from coalib.bearlib.languages.documentation.DocumentationComment import (
+    DocumentationComment)
 
 
 class FunctionMetadata:
@@ -161,19 +162,19 @@ class FunctionMetadata:
 
             if i < num_non_defaults:
                 non_optional_params[arg] = (
-                    doc_comment.param_dict.get(arg, cls.str_nodesc),
+                    doc_comment.params.get(arg, cls.str_nodesc),
                     argspec.annotations.get(arg, None))
             else:
                 optional_params[arg] = (
-                    doc_comment.param_dict.get(arg, cls.str_nodesc) + " (" +
+                    doc_comment.params.get(arg, cls.str_nodesc) + " (" +
                     cls.str_optional.format(
                         str(defaults[i-num_non_defaults])) + ")",
                     argspec.annotations.get(arg, None),
                     defaults[i-num_non_defaults])
 
         return cls(name=func.__name__,
-                   desc=doc_comment.desc,
-                   retval_desc=doc_comment.retval_desc,
+                   desc=doc_comment.description,
+                   retval_desc=doc_comment.retval,
                    non_optional_params=non_optional_params,
                    optional_params=optional_params,
                    omit=omit)

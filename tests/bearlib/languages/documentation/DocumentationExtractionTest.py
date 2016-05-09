@@ -175,8 +175,8 @@ class DocumentationExtractionTest(unittest.TestCase):
 
         # Change only the docstyle in expected results.
         expected = list(DocumentationComment(r.documentation,
-                                             r.marker,
-                                             r.range)
+                                             r.markers,
+                                             r.textrange)
                         for r in expected)
 
         expected.insert(4, DocumentationComment(
