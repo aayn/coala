@@ -17,6 +17,7 @@ class CustomFormatter(argparse.RawDescriptionHelpFormatter):
     """
     A Custom Formatter that will keep the metavars in the usage but remove them
     in the more detailed arguments section.
+    see https://docs.python.org/3/library/argparse.html#formatter-class
     """
 
     def _format_action_invocation(self, action):
@@ -64,6 +65,8 @@ def default_arg_parser(formatter_class=None):
 
     info_group = arg_parser.add_argument_group('Info')
 
+    # action 'help' displays all the options and their descriptions in the Unix
+    # help format
     info_group.add_argument('-h',
                             '--help',
                             action='help',
